@@ -11,7 +11,7 @@ COMPOSER       = $(EXEC) composer
 deploy: build
 	@echo "📦 Build done"
 
-build: create_env_file recreate deps
+build: create_env_file rebuild test
 
 deps: composer-install migrate
 

@@ -2,14 +2,14 @@
 
 namespace App\WineTasting\Signin\Domain\Dto;
 
-class UserDto
+class SignInUserDto
 {
 
     public function __construct(private string $email, private string $password)
     {
     }
 
-    public static function create($email, $password): UserDto
+    public static function create($email, $password): SignInUserDto
     {
 
         return new self($email, $password);

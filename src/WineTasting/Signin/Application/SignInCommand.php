@@ -23,7 +23,7 @@ final class SignInCommand
     public function mapToDto(): SingInByEmailDto
     {
 
-        return new SingInByEmailDto((string)$this->email);
+        return new SingInByEmailDto($this->email);
     }
 
     /**

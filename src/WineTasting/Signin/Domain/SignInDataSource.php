@@ -3,9 +3,9 @@
 namespace App\WineTasting\Signin\Domain;
 
 use App\WineTasting\Signin\Domain\Dto\SingInByEmailDto;
-use App\WineTasting\Signin\Domain\Dto\UserDto;
+use App\WineTasting\Signin\Domain\Dto\SignInUserDto;
 
 interface SignInDataSource
 {
-    public function authenticate(SingInByEmailDto $singInDto): UserDto;
+    public function authenticateByEmail(SingInByEmailDto $singInDto): SignInUserDto;
 }
