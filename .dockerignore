@@ -1,0 +1,15 @@
+tests
+.env.local
+.env.test.*
+.phpunit.result.cache
+.DS_Store
+.idea
+**/.vscode/
+/vendor/
+/var/
+.git
+.gitignore
+README.md
+docker-compose*
+composer.phar
+Makefile
