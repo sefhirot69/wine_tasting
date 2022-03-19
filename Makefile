@@ -1,0 +1,100 @@
+# VARIABLES
+DOCKER_COMPOSE = docker-compose
+CONTAINER      = [INSERTE AQUí el nombre del contenedor]
+EXEC           = docker exec -ti $(CONTAINER)
+EXEC_PHP       = $(EXEC) php
+SYMFONY        = $(EXEC_PHP) bin/console
+COMPOSER       = $(EXEC) composer
+
+.DEFAULT_GOAL := deploy
+
+deploy: build
+	@echo "📦 Build done"
+
+build: create_env_file recreate deps
+
+deps: composer-install migrate
+
+create_env_file:
+	@if [ ! -f .env.local ]; then cp .env .env.local; fi
+
+# 🧪 Testing
+test:
+	$(EXEC) make run-tests
+	@echo "Test Executed ✅"
+run-tests:
+	./vendor/bin/phpunit
+
+# 🔦 Linter
+lint:
+	$(EXEC) ./vendor/bin/php-cs-fixer fix --diff
+	@echo "Coding Standar Fixer Executed ✅"
+lint-diff:
+	$(EXEC_TI) ./vendor/bin/php-cs-fixer fix --dry-run --diff
+	@echo "Coding Standar Fixer Executed ✅"
+
+# 🐘 Composer
+composer-install: ACTION=install
+
+composer-update: ACTION=update $(module)
+
+composer-require: ACTION=require $(module)
+
+composer composer-install composer-update composer-require: create_env_file
+	$(COMPOSER) $(ACTION) \
+			--ignore-platform-reqs \
+			--no-ansi
+
+# 🐳 Docker Compose
+start:
+	@echo "🚀 Deploy!!!"
+	$(DOCKER_COMPOSE) up -d
+stop:
+	@echo "🛑 Stop container!!!"
+	$(DOCKER_COMPOSE) stop
+recreate:
+	@echo "🔥 Recreate container!!!"
+	$(DOCKER_COMPOSE) up -d --build --remove-orphans --force-recreate
+rebuild:
+	@echo "🔥 Rebuild container!!!"
+	$(DOCKER_COMPOSE) build --pull --force-rm --no-cache
+	make deps
+	make start
+
+# 🦝 Apache
+reload:
+	$(EXEC) /bin/bash service apache2 restart || true
+
+# 📦 Database
+create-database:
+	$(SYMFONY) doctrine:database:create --if-not-exists
+	@echo "🎊 Database created!"
+
+# Migraciones
+migrate-generate:
+	$(SYMFONY) doctrine:migrations:generate
+
+migrate:
+	@docker exec $(CONTAINER) bin/console doctrine:migrations:migrate
+
+migrate-diff:
+	@docker exec $(CONTAINER) bin/console doctrine:migrations:diff
+
+migrate-down : ACTION=down $(file)
+
+migrate-up : ACTION=up $(file)
+
+migrate-down migrate-up:
+	@docker exec $(CONTAINER) bin/console --$(ACTION)
+
+# Make Bundle
+migration:
+	$(SYMFONY) make:migration
+entity:
+	$(SYMFONY) make:entity
+controller:
+	$(SYMFONY) make:controller
+
+#cache
+clear:
+	$(SYMFONY) cache:clear

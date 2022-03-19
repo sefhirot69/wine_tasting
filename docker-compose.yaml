@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  container-apache:
+    container_name: apache-tasting
+    build:
+      context: .
+    environment:
+      XDEBUG_CONFIG: client_host=host.docker.internal
+    ports:
+      - "90:80"
+    volumes:
+      - .:/var/www/html
+    restart: unless-stopped
+    networks:
+      - tasting-network
+  db:
+    container_name: tasting-db
+    image: postgres:${POSTGRES_VERSION:-13}-alpine
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-tasting}
+      # You should definitely change the password in production
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-changeMe}
+      POSTGRES_USER: ${POSTGRES_USER:-symfony}
+    volumes:
+      - db-data:/var/lib/postgresql/data:rw
+    restart: unless-stopped
+    ports:
+      - "5557:5432"
+    networks:
+      - tasting-network
+
+volumes:
+  db-data:
+
+networks:
+  tasting-network:
+    name: tasting-network
