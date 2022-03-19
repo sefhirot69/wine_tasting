@@ -7,14 +7,14 @@ namespace App\WineTasting\Shared\Domain\Dto;
 final class UserDto
 {
 
-    public function __construct(private int $id, private string $email, private string $password)
+    public function __construct(private int $id, private string $email, private array $roles, private string $password)
     {
     }
 
-    public static function create(int $id, string $email, string $password): self
+    public static function create(int $id, string $email, array $roles, string $password): self
     {
 
-        return new self($id, $email, $password);
+        return new self($id, $email, $roles, $password);
     }
 
     /**
@@ -42,6 +42,14 @@ final class UserDto
     {
 
         return $this->password;
+    }
+
+    /**
+     * @return array
+     */
+    public function getRoles(): array
+    {
+        return $this->roles;
     }
 
 }

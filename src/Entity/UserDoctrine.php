@@ -2,28 +2,49 @@
 
 namespace App\Entity;
 
-use App\Repository\UserRepository;
+use App\Repository\DoctrineUserRepository;
+use App\WineTasting\Shared\Domain\Dto\UserDto;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-#[ORM\Entity(repositoryClass: UserRepository::class)]
+#[ORM\Entity(repositoryClass: DoctrineUserRepository::class)]
 #[ORM\Table(name: '`user`')]
-class User implements UserInterface, PasswordAuthenticatedUserInterface
+class UserDoctrine implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private $id;
+    private int $id;
 
     #[ORM\Column(type: 'string', length: 180, unique: true)]
-    private $email;
+    private string $email;
 
     #[ORM\Column(type: 'json')]
-    private $roles = [];
+    private array $roles = [];
 
     #[ORM\Column(type: 'string')]
-    private $password;
+    private string $password;
+
+    /**
+     * @param string $email
+     * @param array $roles
+     * @param string $password
+     * @param int|null $id
+     */
+    public function __construct(string $email, array $roles, string $password, ?int $id)
+    {
+        $this->email = $email;
+        $this->roles = $roles;
+        $this->password = $password;
+        $this->id = $id;
+    }
+
+
+    public static function create(string $email, array $roles, string $password, ?int $id): self
+    {
+        return new self($email, $roles, $password, $id);
+    }
 
     public function getId(): ?int
     {
@@ -49,7 +70,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getUserIdentifier(): string
     {
-        return (string) $this->email;
+        return (string)$this->email;
     }
 
     /**
@@ -93,5 +114,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function mapToUserDto(): UserDto
+    {
+        return UserDto::create(
+            $this->getId(),
+            $this->getEmail(),
+            $this->getRoles(),
+            $this->getPassword()
+        );
     }
 }

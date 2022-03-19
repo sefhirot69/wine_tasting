@@ -33,7 +33,7 @@ class SymfonySignInRepositoryTest extends TestCase
         $this->userDataSourceMock
             ->expects(self::once())
             ->method('findUserByEmail')
-            ->willReturn(UserDto::create(1,$email->getEmail(),'****'));
+            ->willReturn(UserDto::create(1,$email->getEmail(),[],'****'));
         $signInEmailDto = SingInByEmailDto::create($email);
         //WHEN
 

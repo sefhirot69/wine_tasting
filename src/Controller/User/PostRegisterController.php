@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Controller\User;
 
-use App\Entity\User;
-use App\Repository\UserRepository;
+use App\Entity\UserDoctrine;
+use App\Repository\DoctrineUserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,7 +21,7 @@ final class PostRegisterController extends AbstractController
 
     public function __construct(
         private UserPasswordHasherInterface $passwordHarsher,
-        private UserRepository $userRepository,
+        private DoctrineUserRepository $userRepository,
         private UserAuthenticatorInterface $userAuthenticator,
         private FormLoginAuthenticator $formLoginAuthenticator
     ) {
@@ -31,7 +31,7 @@ final class PostRegisterController extends AbstractController
     public function __invoke(Request $request): Response
     {
 
-        $user              = new User();
+        $user              = new UserDoctrine();
         $plaintextPassword = $request->request->get('password');
 
         $user->setEmail($request->request->get('email'));
