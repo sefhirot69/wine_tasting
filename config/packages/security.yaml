@@ -13,15 +13,18 @@ security:
             entity:
                 class: App\Entity\User
                 property: email
+        app_user_custom_provider:
+            id: App\Security\UserProvider
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
             lazy: true
-            provider: app_user_provider
+            provider: app_user_custom_provider
             entry_point: form_login
-            custom_authenticator: App\Security\LoginAuthenticator
+            custom_authenticator:
+                - App\Security\LoginAuthenticator
             logout:
                 path: app_logout
                 # where to redirect after logout
