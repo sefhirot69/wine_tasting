@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace WineTasting\Signin\Application;
+namespace App\WineTasting\Signin\Application;
 
-use WineTasting\Signin\Domain\Dto\UserDto;
-use WineTasting\Signin\Domain\SignInDataSource;
+use App\WineTasting\Signin\Domain\Dto\UserDto;
+use App\WineTasting\Signin\Domain\SignInDataSource;
 
 final class SignInCommandHandler
 {

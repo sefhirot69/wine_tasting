@@ -1,9 +1,9 @@
 <?php
 
-namespace WineTasting\Signin\Domain;
+namespace App\WineTasting\Signin\Domain;
 
-use WineTasting\Signin\Domain\Dto\SingInByEmailDto;
-use WineTasting\Signin\Domain\Dto\UserDto;
+use App\WineTasting\Signin\Domain\Dto\SingInByEmailDto;
+use App\WineTasting\Signin\Domain\Dto\UserDto;
 
 interface SignInDataSource
 {

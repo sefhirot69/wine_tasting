@@ -1,6 +1,6 @@
 <?php
 
-namespace WineTasting\Signin\Domain\Dto;
+namespace App\WineTasting\Signin\Domain\Dto;
 
 class UserDto
 {

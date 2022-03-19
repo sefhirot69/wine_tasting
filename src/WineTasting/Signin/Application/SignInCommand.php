@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace WineTasting\Signin\Application;
+namespace App\WineTasting\Signin\Application;
 
-use WineTasting\Signin\Domain\Dto\SingInByEmailDto;
-use WineTasting\Signin\Domain\SignInEmailValueObject;
+use App\WineTasting\Signin\Domain\Dto\SingInByEmailDto;
+use App\WineTasting\Signin\Domain\SignInEmailValueObject;
 
 final class SignInCommand
 {
@@ -24,6 +24,24 @@ final class SignInCommand
     {
 
         return new SingInByEmailDto((string)$this->email);
+    }
+
+    /**
+     * @return SignInEmailValueObject
+     */
+    public function getEmail(): SignInEmailValueObject
+    {
+
+        return $this->email;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPassword(): string
+    {
+
+        return $this->password;
     }
 
 }

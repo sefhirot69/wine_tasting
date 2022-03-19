@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace WineTasting\Shared\Domain\ValueObjects;
+namespace App\WineTasting\Shared\Domain\ValueObjects;
 
-use WineTasting\Shared\Domain\Exceptions\InvalidSignInEmailException;
+use App\WineTasting\Shared\Domain\Exceptions\InvalidSignInEmailException;
 
 class EmailValueObject
 {

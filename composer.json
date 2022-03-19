@@ -43,8 +43,7 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "src/",
-            "VineTasting\\" : "src/WineTasting/"
+            "App\\": "src/"
         }
     },
     "autoload-dev": {

@@ -1,8 +1,8 @@
 <?php
 
-namespace WineTasting\Signin\Domain;
+namespace App\WineTasting\Signin\Domain;
 
-use WineTasting\Shared\Domain\ValueObjects\EmailValueObject;
+use App\WineTasting\Shared\Domain\ValueObjects\EmailValueObject;
 
 final class SignInEmailValueObject extends EmailValueObject
 {
