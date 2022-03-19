@@ -2,14 +2,12 @@
 
 declare(strict_types=1);
 
-
 namespace App\WineTasting\Shared\Domain\ValueObjects;
 
 use App\WineTasting\Shared\Domain\Exceptions\InvalidPasswordException;
 
 final class PasswordValueObject
 {
-
     /**
      * @throws InvalidPasswordException
      */
@@ -18,16 +16,12 @@ final class PasswordValueObject
         $this->assertPasswordIsFormatValid($this->password);
     }
 
-    /**
-     * @return string
-     */
     public function getPassword(): string
     {
         return $this->password;
     }
 
     /**
-     *
      * @throws InvalidPasswordException
      */
     private function assertPasswordIsFormatValid(string $value): void

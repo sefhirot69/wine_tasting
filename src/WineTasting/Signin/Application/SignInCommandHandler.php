@@ -9,7 +9,6 @@ use App\WineTasting\Signin\Domain\SignInDataSource;
 
 final class SignInCommandHandler
 {
-
     public function __construct(private SignInDataSource $signInDataSource)
     {
     }
@@ -18,5 +17,4 @@ final class SignInCommandHandler
     {
         return $this->signInDataSource->authenticateByEmail($command->mapToDto());
     }
-
 }

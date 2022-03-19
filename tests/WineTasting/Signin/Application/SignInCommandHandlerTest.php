@@ -16,18 +16,15 @@ final class SignInCommandHandlerTest extends TestCase
 
     protected function setUp(): void
     {
-
         $this->signInDataSourceMock = $this->createMock(SignInDataSource::class);
     }
 
     /**
      * @test
-     * @return void
      */
     public function shouldReturnUserDto(): void
     {
-
-        //GIVEN
+        // GIVEN
         $command = SignInCommand::create(new SignInEmailValueObject('test@test.es'), 'fake');
         $userDto = SignInUserDto::create(
             $command->getEmail(),
@@ -38,14 +35,13 @@ final class SignInCommandHandlerTest extends TestCase
             ->method('authenticateByEmail')
             ->willReturn($userDto);
 
-        //WHEN
+        // WHEN
         $commandHandler = new SignInCommandHandler($this->signInDataSourceMock);
-        $result         = ($commandHandler)($command);
+        $result = ($commandHandler)($command);
 
-        //THEN
+        // THEN
         self::assertInstanceOf(SignInUserDto::class, $result);
         self::assertObjectHasAttribute('email', $result);
         self::assertObjectHasAttribute('password', $result);
     }
-
 }

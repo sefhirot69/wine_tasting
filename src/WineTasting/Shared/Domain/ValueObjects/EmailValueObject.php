@@ -16,16 +16,12 @@ class EmailValueObject
         $this->assertEmailIsFormatValid($this->email);
     }
 
-    /**
-     * @return string
-     */
     public function getEmail(): string
     {
         return $this->email;
     }
 
     /**
-     *
      * @throws InvalidSignInEmailException
      */
     private function assertEmailIsFormatValid(string $value): void
@@ -44,5 +40,4 @@ class EmailValueObject
     {
         return $this->email;
     }
-
 }

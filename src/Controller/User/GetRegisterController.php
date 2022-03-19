@@ -13,7 +13,6 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/user')]
 class GetRegisterController extends AbstractController
 {
-
     #[Route('/register', name: 'app_user_register', methods: ['GET'])]
     public function __invoke(): Response
     {

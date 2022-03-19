@@ -18,7 +18,6 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
 
 class UserProvider implements UserProviderInterface, PasswordUpgraderInterface
 {
-
     public function __construct(private SignInCommandHandler $signInCommandHandler)
     {
     }
@@ -68,9 +67,6 @@ class UserProvider implements UserProviderInterface, PasswordUpgraderInterface
      *
      * If your firewall is "stateless: true" (for a pure API), this
      * method is not called.
-     *
-     * @param UserInterface $user
-     * @return UserInterface
      */
     public function refreshUser(UserInterface $user): UserInterface
     {
@@ -93,5 +89,4 @@ class UserProvider implements UserProviderInterface, PasswordUpgraderInterface
     {
         // TODO: Implement upgradePassword() method.
     }
-
 }

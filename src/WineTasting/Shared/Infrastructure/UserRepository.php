@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-
 namespace App\WineTasting\Shared\Infrastructure;
 
 use App\Entity\UserDoctrine;
@@ -14,8 +13,6 @@ use App\WineTasting\User\Domain\UserDataSource;
 
 final class UserRepository implements UserDataSource
 {
-
-
     public function __construct(private DoctrineUserRepository $userRepository)
     {
     }
@@ -34,8 +31,9 @@ final class UserRepository implements UserDataSource
     public function persist(UserRegisterDto $dto): UserDto
     {
         $userDoctrine = UserDoctrine::create(
-            (string)$dto->getEmail(), [],
-            (string)$dto->getPassword()
+            (string) $dto->getEmail(),
+            [],
+            (string) $dto->getPassword()
         );
 
         $this->userRepository->add($userDoctrine);

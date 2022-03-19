@@ -26,12 +26,6 @@ class UserDoctrine implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string')]
     private string $password;
 
-    /**
-     * @param string $email
-     * @param array $roles
-     * @param string $password
-     * @param int|null $id
-     */
     public function __construct(string $email, array $roles, string $password, ?int $id = null)
     {
         $this->setEmail($email);
@@ -39,7 +33,6 @@ class UserDoctrine implements UserInterface, PasswordAuthenticatedUserInterface
         $this->setPassword($password);
         $this->id = $id;
     }
-
 
     public static function create(string $email, array $roles, string $password, ?int $id = null): self
     {
@@ -70,7 +63,7 @@ class UserDoctrine implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getUserIdentifier(): string
     {
-        return (string)$this->email;
+        return (string) $this->email;
     }
 
     /**

@@ -16,31 +16,29 @@ class SymfonySignInRepositoryTest extends TestCase
 {
     private MockObject|UserDataSource $userDataSourceMock;
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
-
         $this->userDataSourceMock = $this->createMock(UserDataSource::class);
     }
 
     /**
      * @test
-     * @return void
      */
-    public function shouldAuthenticateByEmail() : void
+    public function shouldAuthenticateByEmail(): void
     {
-        //GIVEN
+        // GIVEN
         $email = new SignInEmailValueObject('test@test.es');
         $this->userDataSourceMock
             ->expects(self::once())
             ->method('findUserByEmail')
-            ->willReturn(UserDto::create(1,$email->getEmail(),[],'****'));
+            ->willReturn(UserDto::create(1, $email->getEmail(), [], '****'));
         $signInEmailDto = SingInByEmailDto::create($email);
-        //WHEN
+        // WHEN
 
         $repository = new SymfonySignInRepository($this->userDataSourceMock);
         $result = $repository->authenticateByEmail($signInEmailDto);
 
-        //THEN
+        // THEN
         self::assertInstanceOf(SignInUserDto::class, $result);
         self::assertObjectHasAttribute('password', $result);
         self::assertObjectHasAttribute('email', $result);
@@ -48,24 +46,22 @@ class SymfonySignInRepositoryTest extends TestCase
 
     /**
      * @test
-     * @return void
      */
-    public function shouldExpectedEmailNotFound() : void
+    public function shouldExpectedEmailNotFound(): void
     {
-        //THEN
+        // THEN
         $this->expectException(EmailNotFoundException::class);
 
-        //GIVEN
+        // GIVEN
         $email = new SignInEmailValueObject('test@test.es');
         $this->userDataSourceMock
             ->expects(self::once())
             ->method('findUserByEmail')
             ->willReturn(null);
         $signInEmailDto = SingInByEmailDto::create($email);
-        //WHEN
+        // WHEN
 
         $repository = new SymfonySignInRepository($this->userDataSourceMock);
         $repository->authenticateByEmail($signInEmailDto);
     }
-
 }

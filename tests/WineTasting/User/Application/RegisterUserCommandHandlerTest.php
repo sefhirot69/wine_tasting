@@ -15,13 +15,8 @@ use PHPUnit\Framework\TestCase;
 
 class RegisterUserCommandHandlerTest extends TestCase
 {
-    /**
-     * @var UserDataSource|MockObject
-     */
     private MockObject|UserDataSource $userDataSourceMock;
-    /**
-     * @var UserHashPasswordDataSource|MockObject
-     */
+
     private MockObject|UserHashPasswordDataSource $userHashPasswordDataSource;
 
     protected function setUp(): void
@@ -30,13 +25,12 @@ class RegisterUserCommandHandlerTest extends TestCase
         $this->userHashPasswordDataSource = $this->createMock(UserHashPasswordDataSource::class);
     }
 
-
     /**
      * @test
      */
     public function shouldReturnUserDtoIfRegisterIsSuccessful(): void
     {
-        //GIVEN
+        // GIVEN
         $email = new EmailValueObject('test@test.es');
         $plainPassword = new PasswordValueObject('passFake');
         $hashedPassword = new PasswordValueObject('*****');
@@ -51,14 +45,14 @@ class RegisterUserCommandHandlerTest extends TestCase
             ->method('persist')
             ->willReturn(UserDto::create(1, $email, [], $hashedPassword));
 
-        //WHEN
+        // WHEN
         $commandHandler = new RegisterUserCommandHandler(
             $this->userHashPasswordDataSource,
             $this->userDataSourceMock
         );
         $result = ($commandHandler)($command);
 
-        //THEN
+        // THEN
         self::assertInstanceOf(UserDto::class, $result);
         self::assertNotSame($result->getPassword(), $plainPassword);
     }

@@ -12,7 +12,6 @@ use App\WineTasting\Signin\Domain\SignInDataSource;
 
 final class SymfonySignInRepository implements SignInDataSource
 {
-
     public function __construct(private UserDataSource $userDataSource)
     {
     }
@@ -25,10 +24,9 @@ final class SymfonySignInRepository implements SignInDataSource
         $user = $this->userDataSource->findUserByEmail($singInDto->getEmail());
 
         if (null === $user) {
-            throw new EmailNotFoundException((string)$singInDto->getEmail());
+            throw new EmailNotFoundException((string) $singInDto->getEmail());
         }
 
         return SignInUserDto::create($user->getEmail(), $user->getPassword());
     }
-
 }

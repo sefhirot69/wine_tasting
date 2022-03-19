@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-
 namespace App\WineTasting\User\Application;
 
 use App\WineTasting\Shared\Domain\ValueObjects\EmailValueObject;
@@ -20,17 +19,11 @@ final class RegisterUserCommand
         return new self($email, $password);
     }
 
-    /**
-     * @return EmailValueObject
-     */
     public function getEmail(): EmailValueObject
     {
         return $this->email;
     }
 
-    /**
-     * @return PasswordValueObject
-     */
     public function getPassword(): PasswordValueObject
     {
         return $this->password;

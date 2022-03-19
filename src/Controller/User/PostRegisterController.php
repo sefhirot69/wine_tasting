@@ -21,7 +21,6 @@ use Symfony\Component\Security\Http\Authenticator\FormLoginAuthenticator;
 #[Route('/user')]
 final class PostRegisterController extends AbstractController
 {
-
     public function __construct(
         private RegisterUserCommandHandler $commandHandler,
         private UserAuthenticatorInterface $userAuthenticator,
@@ -49,11 +48,7 @@ final class PostRegisterController extends AbstractController
             $this->userAuthenticator->authenticateUser($userDoctrine, $this->formLoginAuthenticator, $request);
 
             return $this->redirectToRoute('app_test');
-
-        } catch (InvalidSignInEmailException | InvalidPasswordException $exception) {
-
+        } catch (InvalidSignInEmailException|InvalidPasswordException $exception) {
         }
-
     }
-
 }

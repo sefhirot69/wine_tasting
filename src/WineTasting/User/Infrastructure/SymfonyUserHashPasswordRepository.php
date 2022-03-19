@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-
 namespace App\WineTasting\User\Infrastructure;
 
 use App\Entity\UserDoctrine;
@@ -14,9 +13,9 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 final class SymfonyUserHashPasswordRepository implements UserHashPasswordDataSource
 {
-
     public function __construct(
-        private UserPasswordHasherInterface $passwordHarsher)
+        private UserPasswordHasherInterface $passwordHarsher
+    )
     {
     }
 
@@ -26,11 +25,11 @@ final class SymfonyUserHashPasswordRepository implements UserHashPasswordDataSou
     public function userWithHashPassword(UserRegisterDto $userRegisterDto): UserRegisterDto
     {
         $userDoctrine = UserDoctrine::create(
-            (string)$userRegisterDto->getEmail(),
+            (string) $userRegisterDto->getEmail(),
             [],
             ''
         );
-        $hashedPassword = $this->passwordHarsher->hashPassword($userDoctrine, (string)$userRegisterDto->getPassword());
+        $hashedPassword = $this->passwordHarsher->hashPassword($userDoctrine, (string) $userRegisterDto->getPassword());
 
         $userDoctrine->setPassword($hashedPassword);
 

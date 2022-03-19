@@ -12,9 +12,6 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class SymfonyUserHashPasswordRepositoryTest extends TestCase
 {
-    /**
-     * @var MockObject|UserPasswordHasherInterface
-     */
     private MockObject|UserPasswordHasherInterface $userPassHasherMock;
 
     protected function setUp(): void
@@ -22,13 +19,12 @@ class SymfonyUserHashPasswordRepositoryTest extends TestCase
         $this->userPassHasherMock = $this->createMock(UserPasswordHasherInterface::class);
     }
 
-
     /**
      * @test
      */
     public function shouldUserRegisterDtoWithHashPassword(): void
     {
-        //GIVEN
+        // GIVEN
         $passwordHashed = new PasswordValueObject('*******');
         $plainPassword = new PasswordValueObject('fake');
         $userRegisterDtoOriginal = UserRegisterDto::create(
@@ -41,11 +37,11 @@ class SymfonyUserHashPasswordRepositoryTest extends TestCase
             ->method('hashPassword')
             ->willReturn($passwordHashed->getPassword());
 
-        //WHEN
+        // WHEN
         $repository = new SymfonyUserHashPasswordRepository($this->userPassHasherMock);
         $result = $repository->userWithHashPassword($userRegisterDtoOriginal);
 
-        //THEN
+        // THEN
         self::assertNotEquals($result->getPassword(), $userRegisterDtoOriginal->getPassword());
         self::assertNotSame($result, $userRegisterDtoOriginal);
     }

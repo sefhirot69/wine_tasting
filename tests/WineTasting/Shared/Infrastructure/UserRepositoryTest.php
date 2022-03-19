@@ -12,9 +12,6 @@ use PHPUnit\Framework\TestCase;
 
 final class UserRepositoryTest extends TestCase
 {
-    /**
-     * @var DoctrineUserRepository|MockObject
-     */
     private DoctrineUserRepository|MockObject $doctrineRepositoryMock;
 
     protected function setUp(): void
@@ -22,25 +19,23 @@ final class UserRepositoryTest extends TestCase
         $this->doctrineRepositoryMock = $this->createMock(DoctrineUserRepository::class);
     }
 
-
     /**
      * @test
-     * @return void
      */
     public function shouldFindUserByEmail(): void
     {
-        //GIVEN
+        // GIVEN
         $email = new EmailValueObject('test@test.es');
         $this->doctrineRepositoryMock
             ->expects(self::once())
             ->method('findOneBy')
             ->willReturn(UserDoctrine::create('test@test.es', [], 'passFake', 1));
 
-        //WHEN
+        // WHEN
         $userRepository = new UserRepository($this->doctrineRepositoryMock);
         $userDto = $userRepository->findUserByEmail($email);
 
-        //THEN
+        // THEN
         self::assertInstanceOf(UserDto::class, $userDto);
         self::assertContains('ROLE_USER', $userDto->getRoles());
         self::assertObjectHasAttribute('password', $userDto);
@@ -50,7 +45,6 @@ final class UserRepositoryTest extends TestCase
 
     /**
      * @test
-     * @return void
      */
     public function shouldReturnNullWhenNotFindUserByEmail(): void
     {
@@ -60,11 +54,11 @@ final class UserRepositoryTest extends TestCase
             ->method('findOneBy')
             ->willReturn(null);
 
-        //WHEN
+        // WHEN
         $userRepository = new UserRepository($this->doctrineRepositoryMock);
         $userDto = $userRepository->findUserByEmail($email);
 
-        //THEN
+        // THEN
         self::assertNull($userDto);
     }
 }
