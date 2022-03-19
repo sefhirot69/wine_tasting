@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\WineTasting\Signin\Infrastructure;
 
+use App\WineTasting\Shared\Domain\Exceptions\EmailNotFoundException;
 use App\WineTasting\Shared\Domain\UserDataSource;
-use App\WineTasting\Signin\Domain\Dto\SingInByEmailDto;
 use App\WineTasting\Signin\Domain\Dto\SignInUserDto;
+use App\WineTasting\Signin\Domain\Dto\SingInByEmailDto;
 use App\WineTasting\Signin\Domain\SignInDataSource;
-use Symfony\Component\Security\Core\Exception\UserNotFoundException;
 
 final class SymfonySignInRepository implements SignInDataSource
 {
@@ -17,12 +17,15 @@ final class SymfonySignInRepository implements SignInDataSource
     {
     }
 
-    public function authenticateByEmail(SingInByEmailDto $singInDto): SignInUserDto {
-
+    /**
+     * @throws EmailNotFoundException
+     */
+    public function authenticateByEmail(SingInByEmailDto $singInDto): SignInUserDto
+    {
         $user = $this->userDataSource->findUserByEmail($singInDto->getEmail());
 
-        if(null === $user) {
-            throw new UserNotFoundException();
+        if (null === $user) {
+            throw new EmailNotFoundException((string)$singInDto->getEmail());
         }
 
         return SignInUserDto::create($user->getEmail(), $user->getPassword());

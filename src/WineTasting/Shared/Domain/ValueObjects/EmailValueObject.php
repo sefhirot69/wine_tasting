@@ -31,7 +31,7 @@ class EmailValueObject
     private function assertEmailIsFormatValid(string $value): void
     {
         if (!filter_var($value, FILTER_VALIDATE_EMAIL)) {
-            throw new InvalidSignInEmailException();
+            throw new InvalidSignInEmailException($value);
         }
     }
 

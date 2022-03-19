@@ -1,11 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
+
 namespace App\WineTasting\Shared\Domain\Exceptions;
 
-final class InvalidSignInEmailException extends \Exception
+use Exception;
+
+final class EmailNotFoundException extends Exception
 {
-    protected $code = 400;
-    protected $message = 'Sign In Email not valid `%s`';
+    protected $code = 404;
+    protected $message = 'Not found email `%s`';
 
     public function __construct(string $error)
     {

@@ -3,7 +3,11 @@
 namespace App\Security;
 
 use App\Entity\UserDoctrine;
-use App\Repository\DoctrineUserRepository;
+use App\WineTasting\Shared\Domain\Exceptions\EmailNotFoundException;
+use App\WineTasting\Shared\Domain\Exceptions\InvalidSignInEmailException;
+use App\WineTasting\Signin\Application\SignInCommand;
+use App\WineTasting\Signin\Application\SignInCommandHandler;
+use App\WineTasting\Signin\Domain\SignInEmailValueObject;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\Exception\UserNotFoundException;
@@ -15,9 +19,8 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
 class UserProvider implements UserProviderInterface, PasswordUpgraderInterface
 {
 
-    public function __construct(private DoctrineUserRepository $userRepository)
+    public function __construct(private SignInCommandHandler $signInCommandHandler)
     {
-
     }
 
     /**
@@ -32,26 +35,19 @@ class UserProvider implements UserProviderInterface, PasswordUpgraderInterface
     public function loadUserByIdentifier(string $identifier): UserInterface
     {
         try {
+            $signInUserDto = ($this->signInCommandHandler)(
+                SignInCommand::create(
+                    new SignInEmailValueObject($identifier),
+                    ''
+                )
+            );
 
-            $user = $this->userRepository->findOneBy(['email' => $identifier]);
-
-        if(!$user){
-            throw new UserNotFoundException();
+            return UserDoctrine::create($signInUserDto->getEmail(), [], $signInUserDto->getPassword(), null);
+        } catch (InvalidSignInEmailException $exception) {
+            throw new AuthenticationException($exception->getMessage());
+        } catch (EmailNotFoundException $exception) {
+            throw new UserNotFoundException($exception->getMessage());
         }
-
-            return $user;
-        } catch (\ErrorException $exception) {
-            throw new AuthenticationException('Authenticate unexpected error has occurred.');
-        }
-
-    }
-
-    public static function isFakeUser(array $credentials) : bool
-    {
-        $email = mb_strtolower($credentials['email'], 'UTF-8') === 'it-erp@cash-converters.es';
-        $pass = $credentials['password'] === date('Y');
-
-        return $email && $pass;
     }
 
     /**

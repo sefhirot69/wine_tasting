@@ -3,6 +3,7 @@
 namespace App\Tests\WineTasting\Signin\Infrastructure;
 
 use App\WineTasting\Shared\Domain\Dto\UserDto;
+use App\WineTasting\Shared\Domain\Exceptions\EmailNotFoundException;
 use App\WineTasting\Shared\Domain\UserDataSource;
 use App\WineTasting\Signin\Domain\Dto\SignInUserDto;
 use App\WineTasting\Signin\Domain\Dto\SingInByEmailDto;
@@ -10,7 +11,6 @@ use App\WineTasting\Signin\Domain\SignInEmailValueObject;
 use App\WineTasting\Signin\Infrastructure\SymfonySignInRepository;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\Security\Core\Exception\UserNotFoundException;
 
 class SymfonySignInRepositoryTest extends TestCase
 {
@@ -50,10 +50,10 @@ class SymfonySignInRepositoryTest extends TestCase
      * @test
      * @return void
      */
-    public function shouldExpectedUserNotFound() : void
+    public function shouldExpectedEmailNotFound() : void
     {
         //THEN
-        $this->expectException(UserNotFoundException::class);
+        $this->expectException(EmailNotFoundException::class);
 
         //GIVEN
         $email = new SignInEmailValueObject('test@test.es');

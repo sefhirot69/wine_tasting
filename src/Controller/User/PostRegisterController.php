@@ -31,10 +31,13 @@ final class PostRegisterController extends AbstractController
     public function __invoke(Request $request): Response
     {
 
-        $user              = new UserDoctrine();
+        $user              = new UserDoctrine(
+            $request->request->get('email'),
+            [],
+            ''
+        );
         $plaintextPassword = $request->request->get('password');
 
-        $user->setEmail($request->request->get('email'));
 
         $hashedPassword = $this->passwordHarsher->hashPassword($user, $plaintextPassword);
         $user->setPassword($hashedPassword);
