@@ -1,6 +1,6 @@
 # VARIABLES
 DOCKER_COMPOSE = docker-compose
-CONTAINER      = [INSERTE AQUí el nombre del contenedor]
+CONTAINER      = apache-tasting
 EXEC           = docker exec -ti $(CONTAINER)
 EXEC_PHP       = $(EXEC) php
 SYMFONY        = $(EXEC_PHP) bin/console
