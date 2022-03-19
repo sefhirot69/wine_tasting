@@ -7,10 +7,10 @@ namespace App\WineTasting\Shared\Infrastructure;
 
 use App\Entity\UserDoctrine;
 use App\Repository\DoctrineUserRepository;
+use App\WineTasting\Shared\Domain\ValueObjects\EmailValueObject;
 use App\WineTasting\User\Domain\Dto\UserDto;
 use App\WineTasting\User\Domain\Dto\UserRegisterDto;
 use App\WineTasting\User\Domain\UserDataSource;
-use App\WineTasting\Shared\Domain\ValueObjects\EmailValueObject;
 
 final class UserRepository implements UserDataSource
 {
@@ -24,15 +24,27 @@ final class UserRepository implements UserDataSource
     {
         $userDoctrine = $this->userRepository->findOneBy(['email' => $email->getEmail()]);
 
-        if(!$userDoctrine instanceof UserDoctrine) {
+        if (!$userDoctrine instanceof UserDoctrine) {
             return null;
         }
 
         return $userDoctrine->mapToUserDto();
     }
 
-    public function persist(UserRegisterDto $dto): bool
+    public function persist(UserRegisterDto $dto): UserDto
     {
-        // TODO: Implement persist() method.
+        $userDoctrine = UserDoctrine::create(
+            (string)$dto->getEmail(), [],
+            (string)$dto->getPassword()
+        );
+
+        $this->userRepository->add($userDoctrine);
+
+        return $userDoctrine->mapToUserDto();
+    }
+
+    public function findById(int $id): ?UserDto
+    {
+        // TODO: Implement findById() method.
     }
 }

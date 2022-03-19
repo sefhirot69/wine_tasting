@@ -12,5 +12,7 @@ interface UserDataSource
 {
     public function findUserByEmail(EmailValueObject $email): ?UserDto;
 
-    public function persist(UserRegisterDto $dto): bool;
+    public function findById(int $id): ?UserDto;
+
+    public function persist(UserRegisterDto $dto): UserDto;
 }

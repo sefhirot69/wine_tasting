@@ -5,12 +5,15 @@ declare(strict_types=1);
 namespace App\Controller\User;
 
 use App\Entity\UserDoctrine;
-use App\Repository\DoctrineUserRepository;
+use App\WineTasting\Shared\Domain\Exceptions\InvalidPasswordException;
+use App\WineTasting\Shared\Domain\Exceptions\InvalidSignInEmailException;
+use App\WineTasting\Shared\Domain\ValueObjects\EmailValueObject;
+use App\WineTasting\Shared\Domain\ValueObjects\PasswordValueObject;
+use App\WineTasting\User\Application\RegisterUserCommand;
+use App\WineTasting\User\Application\RegisterUserCommandHandler;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 use Symfony\Component\Security\Http\Authenticator\FormLoginAuthenticator;
@@ -20,8 +23,7 @@ final class PostRegisterController extends AbstractController
 {
 
     public function __construct(
-        private UserPasswordHasherInterface $passwordHarsher,
-        private DoctrineUserRepository $userRepository,
+        private RegisterUserCommandHandler $commandHandler,
         private UserAuthenticatorInterface $userAuthenticator,
         private FormLoginAuthenticator $formLoginAuthenticator
     ) {
@@ -30,23 +32,28 @@ final class PostRegisterController extends AbstractController
     #[Route('/register', name: 'app_user_new', methods: ['POST'])]
     public function __invoke(Request $request): Response
     {
+        try {
+            $email = new EmailValueObject($request->request->get('email'));
+            $plaintextPassword = new PasswordValueObject($request->request->get('password'));
 
-        $user              = new UserDoctrine(
-            $request->request->get('email'),
-            [],
-            ''
-        );
-        $plaintextPassword = $request->request->get('password');
+            $command = RegisterUserCommand::create($email, $plaintextPassword);
+            $result = ($this->commandHandler)($command);
 
+            $userDoctrine = UserDoctrine::create(
+                $result->getEmail(),
+                $result->getRoles(),
+                $result->getPassword(),
+                $result->getId()
+            );
 
-        $hashedPassword = $this->passwordHarsher->hashPassword($user, $plaintextPassword);
-        $user->setPassword($hashedPassword);
+            $this->userAuthenticator->authenticateUser($userDoctrine, $this->formLoginAuthenticator, $request);
 
-        $this->userRepository->add($user);
+            return $this->redirectToRoute('app_test');
 
-        $this->userAuthenticator->authenticateUser($user, $this->formLoginAuthenticator, $request);
+        } catch (InvalidSignInEmailException | InvalidPasswordException $exception) {
 
-        return $this->redirectToRoute('app_test');
+        }
+
     }
 
 }
