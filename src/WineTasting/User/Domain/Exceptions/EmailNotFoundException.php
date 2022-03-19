@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 
-namespace App\WineTasting\Shared\Domain\Exceptions;
+namespace App\WineTasting\User\Domain\Exceptions;
 
 use Exception;
 

@@ -3,7 +3,7 @@
 namespace App\Security;
 
 use App\Entity\UserDoctrine;
-use App\WineTasting\Shared\Domain\Exceptions\EmailNotFoundException;
+use App\WineTasting\User\Domain\Exceptions\EmailNotFoundException;
 use App\WineTasting\Shared\Domain\Exceptions\InvalidSignInEmailException;
 use App\WineTasting\Signin\Application\SignInCommand;
 use App\WineTasting\Signin\Application\SignInCommandHandler;

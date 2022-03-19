@@ -2,9 +2,9 @@
 
 namespace App\Tests\WineTasting\Signin\Infrastructure;
 
-use App\WineTasting\Shared\Domain\Dto\UserDto;
-use App\WineTasting\Shared\Domain\Exceptions\EmailNotFoundException;
-use App\WineTasting\Shared\Domain\UserDataSource;
+use App\WineTasting\User\Domain\Dto\UserDto;
+use App\WineTasting\User\Domain\Exceptions\EmailNotFoundException;
+use App\WineTasting\User\Domain\UserDataSource;
 use App\WineTasting\Signin\Domain\Dto\SignInUserDto;
 use App\WineTasting\Signin\Domain\Dto\SingInByEmailDto;
 use App\WineTasting\Signin\Domain\SignInEmailValueObject;

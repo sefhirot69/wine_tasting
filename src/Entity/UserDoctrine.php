@@ -3,7 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\DoctrineUserRepository;
-use App\WineTasting\Shared\Domain\Dto\UserDto;
+use App\WineTasting\User\Domain\Dto\UserDto;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
