@@ -58,8 +58,8 @@ recreate:
 rebuild:
 	@echo "🔥 Rebuild container!!!"
 	$(DOCKER_COMPOSE) build --pull --force-rm --no-cache
-	make deps
 	make start
+	make deps
 
 # 🦝 Apache
 reload:
