@@ -8,6 +8,7 @@ namespace App\WineTasting\Shared\Infrastructure;
 use App\Entity\UserDoctrine;
 use App\Repository\DoctrineUserRepository;
 use App\WineTasting\User\Domain\Dto\UserDto;
+use App\WineTasting\User\Domain\Dto\UserRegisterDto;
 use App\WineTasting\User\Domain\UserDataSource;
 use App\WineTasting\Shared\Domain\ValueObjects\EmailValueObject;
 
@@ -28,5 +29,10 @@ final class UserRepository implements UserDataSource
         }
 
         return $userDoctrine->mapToUserDto();
+    }
+
+    public function persist(UserRegisterDto $dto): bool
+    {
+        // TODO: Implement persist() method.
     }
 }
