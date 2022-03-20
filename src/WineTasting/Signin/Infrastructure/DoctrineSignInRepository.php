@@ -10,7 +10,7 @@ use App\WineTasting\Signin\Domain\Dto\SignInUserDto;
 use App\WineTasting\Signin\Domain\Dto\SingInByEmailDto;
 use App\WineTasting\Signin\Domain\SignInDataSource;
 
-final class SymfonySignInRepository implements SignInDataSource
+final class DoctrineSignInRepository implements SignInDataSource
 {
     public function __construct(private UserDataSource $userDataSource)
     {

@@ -2,6 +2,11 @@
 
 namespace App\Entity;
 
+use App\WineTasting\Measurements\Domain\CharacteristicsMeasurements;
+use App\WineTasting\Measurements\Domain\Measurements;
+use App\WineTasting\Measurements\Domain\MeasurementType;
+use App\WineTasting\Measurements\Domain\VarietyType;
+use App\WineTasting\Shared\Domain\ValueObjects\YearValueObject;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -70,6 +75,68 @@ class MeasurementDoctrine
      * })
      */
     private VarietyTypeDoctrine $varietyType;
+
+    /**
+     * @param int $year
+     * @param string $colour
+     * @param int $temperature
+     * @param int $graduation
+     * @param int $ph
+     * @param string|null $observations
+     * @param string $vine
+     * @param MeasurementTypeDoctrine $measurementType
+     * @param VarietyTypeDoctrine $varietyType
+     * @param int|null $id
+     */
+    public function __construct(
+        int $year,
+        string $colour,
+        int $temperature,
+        int $graduation,
+        int $ph,
+        ?string $observations,
+        string $vine,
+        MeasurementTypeDoctrine $measurementType,
+        VarietyTypeDoctrine $varietyType,
+        ?int $id = null,
+    ) {
+        $this->id = $id;
+        $this->year = $year;
+        $this->colour = $colour;
+        $this->temperature = $temperature;
+        $this->graduation = $graduation;
+        $this->ph = $ph;
+        $this->observations = $observations;
+        $this->vine = $vine;
+        $this->measurementType = $measurementType;
+        $this->varietyType = $varietyType;
+    }
+
+    public static function create(
+        int $year,
+        string $colour,
+        int $temperature,
+        int $graduation,
+        int $ph,
+        ?string $observations,
+        string $vine,
+        MeasurementTypeDoctrine $measurementType,
+        VarietyTypeDoctrine $varietyType,
+        ?int $id = null,
+    ): self {
+        return new self(
+            $year,
+            $colour,
+            $temperature,
+            $graduation,
+            $ph,
+            $observations,
+            $vine,
+            $measurementType,
+            $varietyType,
+            $id,
+        );
+    }
 
     public function getId(): int
     {
@@ -182,5 +249,29 @@ class MeasurementDoctrine
         $this->varietyType = $varietyType;
 
         return $this;
+    }
+
+    public function mapToDomain(): Measurements
+    {
+        return Measurements::create(
+            $this->getId(),
+            CharacteristicsMeasurements::create(
+                new YearValueObject($this->getYear()),
+                $this->getColour(),
+                $this->getTemperature(),
+                $this->getGraduation(),
+                $this->getPh(),
+            ),
+            MeasurementType::create(
+                $this->getMeasurementType()->getId(),
+                $this->getMeasurementType()->getName(),
+            ),
+            VarietyType::create(
+                $this->getVarietyType()->getId(),
+                $this->getVarietyType()->getName(),
+            ),
+            $this->getObservations(),
+            $this->getVine()
+        );
     }
 }

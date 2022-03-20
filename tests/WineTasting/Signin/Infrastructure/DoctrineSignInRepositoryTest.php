@@ -8,11 +8,11 @@ use App\WineTasting\User\Domain\UserDataSource;
 use App\WineTasting\Signin\Domain\Dto\SignInUserDto;
 use App\WineTasting\Signin\Domain\Dto\SingInByEmailDto;
 use App\WineTasting\Signin\Domain\SignInEmailValueObject;
-use App\WineTasting\Signin\Infrastructure\SymfonySignInRepository;
+use App\WineTasting\Signin\Infrastructure\DoctrineSignInRepository;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
-class SymfonySignInRepositoryTest extends TestCase
+class DoctrineSignInRepositoryTest extends TestCase
 {
     private MockObject|UserDataSource $userDataSourceMock;
 
@@ -35,7 +35,7 @@ class SymfonySignInRepositoryTest extends TestCase
         $signInEmailDto = SingInByEmailDto::create($email);
         // WHEN
 
-        $repository = new SymfonySignInRepository($this->userDataSourceMock);
+        $repository = new DoctrineSignInRepository($this->userDataSourceMock);
         $result = $repository->authenticateByEmail($signInEmailDto);
 
         // THEN
@@ -61,7 +61,7 @@ class SymfonySignInRepositoryTest extends TestCase
         $signInEmailDto = SingInByEmailDto::create($email);
         // WHEN
 
-        $repository = new SymfonySignInRepository($this->userDataSourceMock);
+        $repository = new DoctrineSignInRepository($this->userDataSourceMock);
         $repository->authenticateByEmail($signInEmailDto);
     }
 }

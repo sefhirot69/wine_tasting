@@ -25,6 +25,21 @@ class MeasurementTypeDoctrine
      */
     private string $name;
 
+    /**
+     * @param string $name
+     * @param int|null $id
+     */
+    public function __construct(string $name, ?int $id = null)
+    {
+        $this->id = $id;
+        $this->name = $name;
+    }
+
+    public static function create(string $name, ?int $id = null): self
+    {
+        return new self($name, $id);
+    }
+
     public function getId(): int
     {
         return $this->id;

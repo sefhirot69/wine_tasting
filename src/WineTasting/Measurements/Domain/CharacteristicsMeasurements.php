@@ -18,6 +18,22 @@ final class CharacteristicsMeasurements
     ) {
     }
 
+    public static function create(
+        YearValueObject $year,
+        string $colour,
+        int $temperature,
+        int $graduation,
+        int $ph,
+    ): self {
+        return new self(
+            $year,
+            $colour,
+            $temperature,
+            $graduation,
+            $ph,
+        );
+    }
+
     public function getYear(): YearValueObject
     {
         return $this->year;
