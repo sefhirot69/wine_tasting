@@ -5,7 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Sensor
+ * SensorDoctrine
  *
  * @ORM\Table(name="sensor")
  * @ORM\Entity(repositoryClass="App\Repository\DoctrineSensorRepository")
@@ -32,7 +32,7 @@ class SensorDoctrine
     /**
      * @var SensorTypeDoctrine
      *
-     * @ORM\ManyToOne(targetEntity="SensorType")
+     * @ORM\ManyToOne(targetEntity="SensorTypeDoctrine")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="sensor_type", referencedColumnName="id")
      * })

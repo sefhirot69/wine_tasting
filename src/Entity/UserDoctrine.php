@@ -9,7 +9,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  *
- * @ORM\Table(name=""user"", uniqueConstraints={@ORM\UniqueConstraint(name="uniq_8d93d649e7927c74", columns={"email"})})
+ * @ORM\Table(name="user", uniqueConstraints={@ORM\UniqueConstraint(name="uniq_8d93d649e7927c74", columns={"email"})})
  * @ORM\Entity(repositoryClass="App\Repository\DoctrineUserRepository")
  */
 class UserDoctrine implements UserInterface, PasswordAuthenticatedUserInterface
@@ -18,9 +18,9 @@ class UserDoctrine implements UserInterface, PasswordAuthenticatedUserInterface
      * @var null|int
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
+     * @ORM\Id()
      * @ORM\GeneratedValue(strategy="SEQUENCE")
-     * @ORM\SequenceGenerator(sequenceName=""user"_id_seq", allocationSize=1, initialValue=1)
+     * @ORM\SequenceGenerator(sequenceName="user_id_seq", allocationSize=1, initialValue=1)
      */
     private ?int $id;
 
