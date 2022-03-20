@@ -13,7 +13,7 @@ deploy: build
 
 build: create_env_file rebuild test
 
-deps: composer-install migrate
+deps: composer-install migrate fixture
 
 create_env_file:
 	@if [ ! -f .env.local ]; then cp .env .env.local; fi
@@ -70,28 +70,32 @@ create-database:
 	$(SYMFONY) doctrine:database:create --if-not-exists
 	@echo "🎊 Database created!"
 
+fixture:
+	@$(SYMFONY) bin/console doctrine:fixtures:load
+
 # Migraciones
 migrate-generate:
 	$(SYMFONY) doctrine:migrations:generate
 
 migrate:
-	@docker exec $(CONTAINER) bin/console doctrine:migrations:migrate
+	@$(SYMFONY) bin/console doctrine:migrations:migrate
 
 migrate-diff:
-	@docker exec $(CONTAINER) bin/console doctrine:migrations:diff
+	@$(SYMFONY) bin/console doctrine:migrations:diff
 
 migrate-down : ACTION=down $(file)
-
 migrate-up : ACTION=up $(file)
-
 migrate-down migrate-up:
-	@docker exec $(CONTAINER) bin/console --$(ACTION)
+	@$(SYMFONY) bin/console --$(ACTION)
+
 
 # Make Bundle
 migration:
 	$(SYMFONY) make:migration
+
 entity:
 	$(SYMFONY) make:entity
+
 controller:
 	$(SYMFONY) make:controller
 
