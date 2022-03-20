@@ -6,7 +6,6 @@ namespace App\Controller\Measurements;
 
 use App\Repository\DoctrineMeasurementRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -20,6 +19,7 @@ final class ListMeasurementsController extends AbstractController
     public function __invoke(): Response
     {
         $measurements = $this->measurementRepository->findAll();
-        return new JsonResponse($measurements, Response::HTTP_OK);
+
+        return $this->renderForm('measurements/index.html.twig', ['data' => $measurements]);
     }
 }

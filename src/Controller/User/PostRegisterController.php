@@ -38,6 +38,7 @@ final class PostRegisterController extends AbstractController
             $command = RegisterUserCommand::create($email, $plaintextPassword);
             $result = ($this->commandHandler)($command);
 
+            // Creo entidad User de doctrine, porque es necesario para la autenticacion posterior
             $userDoctrine = UserDoctrine::create(
                 $result->getEmail(),
                 $result->getRoles(),
@@ -45,9 +46,10 @@ final class PostRegisterController extends AbstractController
                 $result->getId()
             );
 
+            // Me authentico tras registrarme
             $this->userAuthenticator->authenticateUser($userDoctrine, $this->formLoginAuthenticator, $request);
 
-            return $this->redirectToRoute('app_test');
+            return $this->redirectToRoute('app_list_measurements');
         } catch (InvalidSignInEmailException|InvalidPasswordException $exception) {
         }
     }
