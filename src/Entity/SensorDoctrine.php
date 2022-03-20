@@ -5,7 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * SensorDoctrine
+ * SensorDoctrine.
  *
  * @ORM\Table(name="`sensor`")
  * @ORM\Entity(repositoryClass="App\Repository\DoctrineSensorRepository")
@@ -13,8 +13,6 @@ use Doctrine\ORM\Mapping as ORM;
 class SensorDoctrine
 {
     /**
-     * @var int
-     *
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="SEQUENCE")
@@ -23,15 +21,11 @@ class SensorDoctrine
     private int $id;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="value", type="string", length=50, nullable=false)
      */
     private string $value;
 
     /**
-     * @var SensorTypeDoctrine
-     *
      * @ORM\ManyToOne(targetEntity="SensorTypeDoctrine")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="sensor_type", referencedColumnName="id")
@@ -67,6 +61,4 @@ class SensorDoctrine
 
         return $this;
     }
-
-
 }

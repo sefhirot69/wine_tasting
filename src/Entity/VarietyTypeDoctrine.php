@@ -5,7 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * VarietyType
+ * VarietyType.
  *
  * @ORM\Table(name="`variety_type`")
  * @ORM\Entity(repositoryClass="App\Repository\DoctrineVarietyTypeRepository")
@@ -13,8 +13,6 @@ use Doctrine\ORM\Mapping as ORM;
 class VarietyTypeDoctrine
 {
     /**
-     * @var int
-     *
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="SEQUENCE")
@@ -23,8 +21,6 @@ class VarietyTypeDoctrine
     private int $id;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="name", type="string", length=50, nullable=false)
      */
     private string $name;
@@ -45,6 +41,4 @@ class VarietyTypeDoctrine
 
         return $this;
     }
-
-
 }

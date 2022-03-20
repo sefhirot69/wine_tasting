@@ -8,15 +8,12 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- *
  * @ORM\Table(name="`user`", uniqueConstraints={@ORM\UniqueConstraint(name="uniq_8d93d649e7927c74", columns={"email"})})
  * @ORM\Entity(repositoryClass="App\Repository\DoctrineUserRepository")
  */
 class UserDoctrine implements UserInterface, PasswordAuthenticatedUserInterface
 {
     /**
-     * @var null|int
-     *
      * @ORM\Column(type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="SEQUENCE")
@@ -25,22 +22,16 @@ class UserDoctrine implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="email", type="string", length=180, nullable=false)
      */
     private string $email;
 
     /**
-     * @var array
-     *
      * @ORM\Column(name="roles", type="json", nullable=false)
      */
     private array $roles = [];
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="password", type="string", length=255, nullable=false)
      */
     private string $password;

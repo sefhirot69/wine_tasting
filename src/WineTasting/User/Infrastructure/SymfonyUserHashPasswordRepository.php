@@ -15,8 +15,7 @@ final class SymfonyUserHashPasswordRepository implements UserHashPasswordDataSou
 {
     public function __construct(
         private UserPasswordHasherInterface $passwordHarsher
-    )
-    {
+    ) {
     }
 
     /**

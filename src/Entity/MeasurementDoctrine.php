@@ -13,8 +13,6 @@ use Doctrine\ORM\Mapping as ORM;
 class MeasurementDoctrine
 {
     /**
-     * @var int
-     *
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="SEQUENCE")
@@ -23,57 +21,41 @@ class MeasurementDoctrine
     private int $id;
 
     /**
-     * @var int
-     *
      * @ORM\Column(name="year", type="integer", nullable=false)
      */
     private int $year;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="colour", type="string", length=50, nullable=false)
      */
     private string $colour;
 
     /**
-     * @var int
-     *
      * @ORM\Column(name="temperature", type="integer", nullable=false)
      */
     private int $temperature;
 
     /**
-     * @var int
-     *
      * @ORM\Column(name="graduation", type="integer", nullable=false)
      */
     private int $graduation;
 
     /**
-     * @var int
-     *
      * @ORM\Column(name="ph", type="integer", nullable=false)
      */
     private int $ph;
 
     /**
-     * @var string|null
-     *
      * @ORM\Column(name="observations", type="string", length=255, nullable=true)
      */
     private ?string $observations;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="vine", type="string", length=50, nullable=false)
      */
     private string $vine;
 
     /**
-     * @var MeasurementTypeDoctrine
-     *
      * @ORM\ManyToOne(targetEntity="MeasurementTypeDoctrine")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="measurement_type", referencedColumnName="id")
@@ -82,8 +64,6 @@ class MeasurementDoctrine
     private MeasurementTypeDoctrine $measurementType;
 
     /**
-     * @var VarietyTypeDoctrine
-     *
      * @ORM\ManyToOne(targetEntity="VarietyTypeDoctrine")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="variety_type", referencedColumnName="id")

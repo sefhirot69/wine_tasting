@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-
 namespace App\Controller\Measurements;
 
 use App\Repository\DoctrineMeasurementRepository;
@@ -12,7 +11,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 final class ListMeasurementsController extends AbstractController
 {
-
     public function __construct(private DoctrineMeasurementRepository $repository)
     {
     }
