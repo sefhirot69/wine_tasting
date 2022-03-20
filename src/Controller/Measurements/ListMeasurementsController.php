@@ -20,6 +20,6 @@ final class ListMeasurementsController extends AbstractController
     {
         $measurements = $this->measurementRepository->findAll();
 
-        return $this->renderForm('measurements/index.html.twig', ['data' => $measurements]);
+        return $this->renderForm('measurements/list.html.twig', ['data' => $measurements]);
     }
 }

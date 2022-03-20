@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ListMeasurementsController!{% endblock %}
+
+{% block viewData %}
+    <table class="table">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Año</th>
+        <th scope="col">Color</th>
+        <th scope="col">Tipo Medición</th>
+        <th scope="col">Tipo Variación</th>
+        <th scope="col">Temperatura</th>
+        <th scope="col">Graduación</th>
+        <th scope="col">Ph</th>
+        <th scope="col">Observaciones</th>
+        <th scope="col">Vino</th>
+    </tr>
+    </thead>
+    {% for measurement in data %}
+        <tr>
+            <td>{{ measurement.id }}</td>
+            <td>{{ measurement.year }}</td>
+            <td>{{ measurement.colour }}</td>
+            <td>{{ measurement.measurementType.name }}</td>
+            <td>{{ measurement.varietyType.name }}</td>
+            <td>{{ measurement.temperature }}</td>
+            <td>{{ measurement.graduation }}</td>
+            <td>{{ measurement.ph }}</td>
+            <td>{{ measurement.observations }}</td>
+            <td>{{ measurement.vine }}</td>
+        </tr>
+    {% endfor %}
+
+{% endblock viewData %}

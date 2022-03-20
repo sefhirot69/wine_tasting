@@ -1,0 +1,5 @@
+{% set routeName = app.request.attributes.get('_route') %}
+<div class="btn-group">
+    <a href="{{ url('app_list_measurements') }}" class="btn btn-primary {{ routeName == 'app_list_measurements' ? 'active' : '' }}" aria-current="page">Listado</a>
+    <a href="" class="btn btn-primary">Añadir medición</a>
+</div>

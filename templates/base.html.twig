@@ -21,6 +21,12 @@
 <body>
 <div class="container">
     {% block body %}
+        {% if app.user is not null %}
+            {% include 'menu.html.twig' %}
+        {% endif %}
+
+        {% block viewData %}{% endblock viewData %}
+
     {% endblock %}
 </div>
 </body>
