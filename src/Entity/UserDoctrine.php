@@ -2,28 +2,47 @@
 
 namespace App\Entity;
 
-use App\Repository\DoctrineUserRepository;
 use App\WineTasting\User\Domain\Dto\UserDto;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-#[ORM\Entity(repositoryClass: DoctrineUserRepository::class)]
-#[ORM\Table(name: '`user`')]
+/**
+ *
+ * @ORM\Table(name=""user"", uniqueConstraints={@ORM\UniqueConstraint(name="uniq_8d93d649e7927c74", columns={"email"})})
+ * @ORM\Entity(repositoryClass="App\Repository\DoctrineUserRepository")
+ */
 class UserDoctrine implements UserInterface, PasswordAuthenticatedUserInterface
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column(type: 'integer')]
+    /**
+     * @var null|int
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName=""user"_id_seq", allocationSize=1, initialValue=1)
+     */
     private ?int $id;
 
-    #[ORM\Column(type: 'string', length: 180, unique: true)]
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="email", type="string", length=180, nullable=false)
+     */
     private string $email;
 
-    #[ORM\Column(type: 'json')]
+    /**
+     * @var array
+     *
+     * @ORM\Column(name="roles", type="json", nullable=false)
+     */
     private array $roles = [];
 
-    #[ORM\Column(type: 'string')]
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="password", type="string", length=255, nullable=false)
+     */
     private string $password;
 
     public function __construct(string $email, array $roles, string $password, ?int $id = null)
