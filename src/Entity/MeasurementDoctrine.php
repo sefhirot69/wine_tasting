@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Measurement.
  *
- * @ORM\Table(name="measurement", indexes={@ORM\Index(name="IDX_2CE0D811FF48B378", columns={"measurement_type"}), @ORM\Index(name="IDX_2CE0D811985C1F18", columns={"variety_type"})})
+ * @ORM\Table(name="`measurement`", indexes={@ORM\Index(name="IDX_2CE0D811FF48B378", columns={"measurement_type"}), @ORM\Index(name="IDX_2CE0D811985C1F18", columns={"variety_type"})})
  * @ORM\Entity(repositoryClass="App\Repository\DoctrineMeasurementRepository")
  */
 class MeasurementDoctrine

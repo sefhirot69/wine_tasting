@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * MeasurementType.
  *
- * @ORM\Table(name="measurement_type")
+ * @ORM\Table(name="`measurement_type`")
  * @ORM\Entity(repositoryClass="App\Repository\DoctrineMeasurementTypeRepository")
  */
 class MeasurementTypeDoctrine

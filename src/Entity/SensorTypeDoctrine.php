@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * SensorType.
  *
- * @ORM\Table(name="sensor_type")
+ * @ORM\Table(name="`sensor_type`")
  * @ORM\Entity(repositoryClass="App\Repository\DoctrineSensorTypeRepository")
  */
 class SensorTypeDoctrine

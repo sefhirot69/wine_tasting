@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * VarietyType
  *
- * @ORM\Table(name="variety_type")
+ * @ORM\Table(name="`variety_type`")
  * @ORM\Entity(repositoryClass="App\Repository\DoctrineVarietyTypeRepository")
  */
 class VarietyTypeDoctrine
