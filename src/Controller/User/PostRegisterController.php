@@ -18,7 +18,6 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 use Symfony\Component\Security\Http\Authenticator\FormLoginAuthenticator;
 
-#[Route('/user')]
 final class PostRegisterController extends AbstractController
 {
     public function __construct(
@@ -28,7 +27,7 @@ final class PostRegisterController extends AbstractController
     ) {
     }
 
-    #[Route('/register', name: 'app_user_new', methods: ['POST'])]
+    #[Route('/registry', name: 'app_user_new', methods: ['POST'])]
     public function __invoke(Request $request): Response
     {
         try {

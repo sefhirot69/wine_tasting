@@ -15,7 +15,7 @@ final class ListMeasurementsController extends AbstractController
     {
     }
 
-    #[Route(path: '/list-measurements', name: 'app_list_measurements', methods: ['GET'])]
+    #[Route(path: '/measurements', name: 'app_list_measurements', methods: ['GET'])]
     public function __invoke(): Response
     {
         $measurements = ($this->listMeasurementsQueryHandler)();
