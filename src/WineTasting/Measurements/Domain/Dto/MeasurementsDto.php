@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\WineTasting\Measurements\Domain\Dto;
 
-final class MeasurementsDto
+final class MeasurementsDto implements \JsonSerializable
 {
     /**
      * @param int                            $id
@@ -70,5 +70,10 @@ final class MeasurementsDto
     public function getVine(): string
     {
         return $this->vine;
+    }
+
+    public function jsonSerialize(): array
+    {
+        return get_object_vars($this);
     }
 }

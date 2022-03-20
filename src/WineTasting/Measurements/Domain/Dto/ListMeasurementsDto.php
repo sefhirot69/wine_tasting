@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\WineTasting\Measurements\Domain\Dto;
 
-final class ListMeasurementsDto
+final class ListMeasurementsDto implements \JsonSerializable
 {
     /**
      * @param MeasurementsDto[] $measurements
@@ -30,4 +30,8 @@ final class ListMeasurementsDto
         return $this->measurements;
     }
 
+    public function jsonSerialize(): array
+    {
+        return get_object_vars($this);
+    }
 }

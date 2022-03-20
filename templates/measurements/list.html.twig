@@ -18,18 +18,18 @@
         <th scope="col">Vino</th>
     </tr>
     </thead>
-    {% for measurement in data %}
+    {% for measurement in data.measurements %}
         <tr>
             <td>{{ measurement.id }}</td>
-            <td>{{ measurement.year }}</td>
-            <td>{{ measurement.colour }}</td>
-            <td>{{ measurement.measurementType.name }}</td>
-            <td>{{ measurement.varietyType.name }}</td>
-            <td>{{ measurement.temperature }}</td>
-            <td>{{ measurement.graduation }}</td>
-            <td>{{ measurement.ph }}</td>
-            <td>{{ measurement.observations }}</td>
-            <td>{{ measurement.vine }}</td>
+             <td>{{ measurement.characteristicsMeasurements.year }}</td>
+             <td>{{ measurement.characteristicsMeasurements.colour }}</td>
+             <td>{{ measurement.measurementType.name }}</td>
+             <td>{{ measurement.varietyType.name }}</td>
+             <td>{{ measurement.characteristicsMeasurements.temperature }}</td>
+             <td>{{ measurement.characteristicsMeasurements.graduation }}</td>
+             <td>{{ measurement.characteristicsMeasurements.ph }}</td>
+             <td>{{ measurement.observations }}</td>
+             <td>{{ measurement.vine }}</td>
         </tr>
     {% endfor %}
 

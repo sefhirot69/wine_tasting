@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\WineTasting\Measurements\Domain\Dto;
 
-final class VarietyTypeDto
+final class VarietyTypeDto implements \JsonSerializable
 {
     public function __construct(
         private int $id,
@@ -25,5 +25,10 @@ final class VarietyTypeDto
     public function getName(): string
     {
         return $this->name;
+    }
+
+    public function jsonSerialize(): array
+    {
+        return get_object_vars($this);
     }
 }

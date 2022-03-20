@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\WineTasting\Measurements\Domain\Dto;
 
-final class CharacteristicsMeasurementsDto
+final class CharacteristicsMeasurementsDto implements \JsonSerializable
 {
     public function __construct(
         private int $year,
@@ -54,5 +54,10 @@ final class CharacteristicsMeasurementsDto
     public function getPh(): int
     {
         return $this->ph;
+    }
+
+    public function jsonSerialize(): array
+    {
+        return get_object_vars($this);
     }
 }
