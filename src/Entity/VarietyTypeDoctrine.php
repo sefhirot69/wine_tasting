@@ -25,10 +25,6 @@ class VarietyTypeDoctrine
      */
     private string $name;
 
-    /**
-     * @param string $name
-     * @param int|null $id
-     */
     public function __construct(string $name, ?int $id = null)
     {
         $this->name = $name;

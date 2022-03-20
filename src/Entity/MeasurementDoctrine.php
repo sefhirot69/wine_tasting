@@ -76,18 +76,6 @@ class MeasurementDoctrine
      */
     private VarietyTypeDoctrine $varietyType;
 
-    /**
-     * @param int $year
-     * @param string $colour
-     * @param int $temperature
-     * @param int $graduation
-     * @param int $ph
-     * @param string|null $observations
-     * @param string $vine
-     * @param MeasurementTypeDoctrine $measurementType
-     * @param VarietyTypeDoctrine $varietyType
-     * @param int|null $id
-     */
     public function __construct(
         int $year,
         string $colour,

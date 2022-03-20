@@ -7,7 +7,6 @@ namespace App\WineTasting\Measurements\Infrastructure;
 use App\Entity\MeasurementDoctrine;
 use App\Repository\DoctrineMeasurementRepository;
 use App\WineTasting\Measurements\Domain\Dto\ListMeasurementsDto;
-use App\WineTasting\Measurements\Domain\Dto\MeasurementsDto;
 use App\WineTasting\Measurements\Domain\ListMeasurementsDataSource;
 
 final class DoctrineListMeasurementsRepository implements ListMeasurementsDataSource
@@ -30,5 +29,4 @@ final class DoctrineListMeasurementsRepository implements ListMeasurementsDataSo
             }, $result)
         );
     }
-
 }
