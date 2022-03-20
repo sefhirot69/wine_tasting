@@ -1,4 +1,6 @@
 {
+    "name": "sefhirot69/wine_tasting",
+    "description": "Wine Tasting",
     "type": "project",
     "license": "proprietary",
     "minimum-stability": "stable",

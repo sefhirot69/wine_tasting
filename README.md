@@ -4,7 +4,7 @@
 ![PHP Composer](https://github.com/sefhirot69/wine_tasting/actions/workflows/composer.yml/badge.svg)
 <a href="#"><img alt="Symfony 6.3" src="https://img.shields.io/badge/Symfony-6.3-purple.svg?style=flat-square&amp;logo=symfony"/></a>
 ![Coding Standar](https://github.com/sefhirot69/wine_tasting/actions/workflows/style_standard.yml/badge.svg)
-![Tests](https://github.com/sefhirot69/wine_tasting/actions/workflows/tests.yml/badge.svg)
+![Tests](https://github.com/sefhirot69/wine_tasting/actions/workflows/test.yml/badge.svg)
 ---
 
 ## 🚀 Instalación
