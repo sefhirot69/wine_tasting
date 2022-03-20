@@ -1,5 +1,22 @@
 {% set routeName = app.request.attributes.get('_route') %}
-<div class="btn-group">
-    <a href="{{ url('app_list_measurements') }}" class="btn btn-primary {{ routeName == 'app_list_measurements' ? 'active' : '' }}" aria-current="page">Listado</a>
-    <a href="" class="btn btn-primary">Añadir medición</a>
-</div>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Cata de vinos</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a href="{{ url('app_list_measurements') }}" class="nav-link {{ routeName == 'app_list_measurements' ? 'active' : '' }}" aria-current="page">Listado</a>
+                </li>
+                <li class="nav-item">
+                    <a href="" class="nav-link ">Añadir medición</a>
+                </li>
+            </ul>
+        </div>
+
+        <a href="{{ url('app_logout') }}" class="btn btn-danger">Logout</a>
+    </div>
+</nav>
