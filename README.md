@@ -134,3 +134,6 @@ De momento son todos los tests unitarios. Pero en el futuro se dividiran en Unit
 └── bootstrap.php
 
 ```
+
+### 🗄️ Estructura de la base de datos
+![image info](./db.png)
