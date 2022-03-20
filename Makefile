@@ -13,7 +13,7 @@ deploy: build
 
 build: create_env_file rebuild test
 
-deps: composer-install migrate fixture
+deps: composer-install create-database migrate fixture
 
 create_env_file:
 	@if [ ! -f .env.local ]; then cp .env .env.local; fi
@@ -71,14 +71,15 @@ create-database:
 	@echo "🎊 Database created!"
 
 fixture:
-	@$(SYMFONY) bin/console doctrine:fixtures:load
+	@$(SYMFONY) doctrine:fixtures:load --purge-with-truncate -q
+
 
 # Migraciones
 migrate-generate:
 	$(SYMFONY) doctrine:migrations:generate
 
 migrate:
-	@$(SYMFONY) bin/console doctrine:migrations:migrate
+	@$(SYMFONY) doctrine:migrations:migrate --no-interaction
 
 migrate-diff:
 	@$(SYMFONY) bin/console doctrine:migrations:diff
