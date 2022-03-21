@@ -25,7 +25,7 @@
     2. ***Opcional*** - Luego dentro del contenedor ejecuta los siguientes comandos para tener datos en la base de datos en el siguiente orden:
        1. `php bin/console doctrine:migration:migrate`
        2. `php bin/console doctrine:fixtures:load -q`
-2. La web estará disponible en la siguiente url [http://localhost:90](http://localhost:90)
+2. La web estará disponible en la siguiente url [http://localhost:90](http://localhost:90/login)
    
 
 ### ✅ Ejecución de Tests
