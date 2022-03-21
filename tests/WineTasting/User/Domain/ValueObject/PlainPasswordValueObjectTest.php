@@ -4,7 +4,6 @@ namespace App\Tests\WineTasting\User\Domain\ValueObject;
 
 use App\WineTasting\Shared\Domain\Exceptions\InvalidLengthPasswordException;
 use App\WineTasting\Shared\Domain\Exceptions\InvalidPasswordFormatException;
-use App\WineTasting\Shared\Domain\ValueObjects\PasswordValueObject;
 use App\WineTasting\User\Domain\ValueObject\PlainPasswordValueObject;
 use PHPUnit\Framework\TestCase;
 
