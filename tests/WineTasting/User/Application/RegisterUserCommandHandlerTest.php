@@ -11,6 +11,7 @@ use App\WineTasting\User\Domain\Dto\UserRegisterDto;
 use App\WineTasting\User\Domain\Exceptions\EmailExistsException;
 use App\WineTasting\User\Domain\UserDataSource;
 use App\WineTasting\User\Domain\UserHashPasswordDataSource;
+use App\WineTasting\User\Domain\ValueObject\PlainPasswordValueObject;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
@@ -33,7 +34,7 @@ class RegisterUserCommandHandlerTest extends TestCase
     {
         // GIVEN
         $email = new EmailValueObject('test@test.es');
-        $plainPassword = new PasswordValueObject('passFake');
+        $plainPassword = new PlainPasswordValueObject('passFake');
         $hashedPassword = new PasswordValueObject('56789');
         $command = RegisterUserCommand::create($email, $plainPassword);
 
@@ -67,8 +68,8 @@ class RegisterUserCommandHandlerTest extends TestCase
         $this->expectException(EmailExistsException::class);
 
         $email = new EmailValueObject('test@test.es');
-        $plainPassword = new PasswordValueObject('passFake');
-        $hashedPassword = new PasswordValueObject('127381293');
+        $plainPassword = new PlainPasswordValueObject('passFake');
+        $hashedPassword = new PasswordValueObject('*******');
         $command = RegisterUserCommand::create($email, $plainPassword);
 
         $this->userHashPasswordDataSource

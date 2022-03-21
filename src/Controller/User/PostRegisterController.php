@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace App\Controller\User;
 
 use App\Entity\UserDoctrine;
+use App\WineTasting\Shared\Domain\Exceptions\InvalidEmailFormatException;
 use App\WineTasting\Shared\Domain\Exceptions\InvalidPasswordException;
-use App\WineTasting\Shared\Domain\Exceptions\InvalidSignInEmailException;
 use App\WineTasting\Shared\Domain\ValueObjects\EmailValueObject;
-use App\WineTasting\Shared\Domain\ValueObjects\PasswordValueObject;
 use App\WineTasting\User\Application\RegisterUserCommand;
 use App\WineTasting\User\Application\RegisterUserCommandHandler;
 use App\WineTasting\User\Domain\Exceptions\EmailExistsException;
+use App\WineTasting\User\Domain\ValueObject\PlainPasswordValueObject;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -33,7 +33,7 @@ final class PostRegisterController extends AbstractController
     {
         try {
             $email = new EmailValueObject($request->request->get('email'));
-            $plaintextPassword = new PasswordValueObject($request->request->get('password'));
+            $plaintextPassword = new PlainPasswordValueObject($request->request->get('password'));
 
             $command = RegisterUserCommand::create($email, $plaintextPassword);
             $result = ($this->commandHandler)($command);
@@ -50,7 +50,7 @@ final class PostRegisterController extends AbstractController
             $this->userAuthenticator->authenticateUser($userDoctrine, $this->formLoginAuthenticator, $request);
 
             return $this->redirectToRoute('app_list_measurements');
-        } catch (InvalidSignInEmailException|InvalidPasswordException|EmailExistsException $exception) {
+        } catch (InvalidEmailFormatException|InvalidPasswordException|EmailExistsException $exception) {
             return $this->renderForm('user/register.html.twig', ['error' => $exception->getMessage()]);
         }
     }

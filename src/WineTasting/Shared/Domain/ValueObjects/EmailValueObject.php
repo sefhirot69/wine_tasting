@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace App\WineTasting\Shared\Domain\ValueObjects;
 
-use App\WineTasting\Shared\Domain\Exceptions\InvalidSignInEmailException;
+use App\WineTasting\Shared\Domain\Exceptions\InvalidEmailFormatException;
 
 class EmailValueObject
 {
     /**
-     * @throws InvalidSignInEmailException
+     * @throws InvalidEmailFormatException
      */
     public function __construct(private string $email)
     {
@@ -22,12 +22,12 @@ class EmailValueObject
     }
 
     /**
-     * @throws InvalidSignInEmailException
+     * @throws InvalidEmailFormatException
      */
     private function assertEmailIsFormatValid(string $value): void
     {
         if (!filter_var($value, FILTER_VALIDATE_EMAIL)) {
-            throw new InvalidSignInEmailException($value);
+            throw new InvalidEmailFormatException($value);
         }
     }
 

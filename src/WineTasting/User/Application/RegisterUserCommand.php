@@ -7,14 +7,15 @@ namespace App\WineTasting\User\Application;
 use App\WineTasting\Shared\Domain\ValueObjects\EmailValueObject;
 use App\WineTasting\Shared\Domain\ValueObjects\PasswordValueObject;
 use App\WineTasting\User\Domain\Dto\UserRegisterDto;
+use App\WineTasting\User\Domain\ValueObject\PlainPasswordValueObject;
 
 final class RegisterUserCommand
 {
-    public function __construct(private EmailValueObject $email, private PasswordValueObject $password)
+    public function __construct(private EmailValueObject $email, private PlainPasswordValueObject $password)
     {
     }
 
-    public static function create(EmailValueObject $email, PasswordValueObject $password): self
+    public static function create(EmailValueObject $email, PlainPasswordValueObject $password): self
     {
         return new self($email, $password);
     }
@@ -24,7 +25,7 @@ final class RegisterUserCommand
         return $this->email;
     }
 
-    public function getPassword(): PasswordValueObject
+    public function getPassword(): PlainPasswordValueObject
     {
         return $this->password;
     }
