@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\WineTasting\Shared\Domain\ValueObjects;
 
+use App\WineTasting\Shared\Domain\Exceptions\InvalidLengthPasswordException;
 use App\WineTasting\Shared\Domain\Exceptions\InvalidPasswordException;
+use App\WineTasting\Shared\Domain\Exceptions\InvalidPasswordFormatException;
 
 final class PasswordValueObject
 {
@@ -13,7 +15,8 @@ final class PasswordValueObject
      */
     public function __construct(private string $password)
     {
-        $this->assertPasswordIsFormatValid($this->password);
+        $this->assertPasswordIsLengthValid($this->password);
+        $this->assertPasswordFormatIsValid($this->password);
     }
 
     public function getPassword(): string
@@ -22,13 +25,25 @@ final class PasswordValueObject
     }
 
     /**
-     * @throws InvalidPasswordException
+     * @throws InvalidLengthPasswordException
      */
-    private function assertPasswordIsFormatValid(string $value): void
+    private function assertPasswordIsLengthValid(string $value): void
     {
-//        if (!filter_var($value, FILTER_VALIDATE_EMAIL)) {
-//            throw new InvalidPasswordException($value);
-//        }
+        $length = strlen($value);
+
+        if ($length < 5 || $length > 10) {
+            throw new InvalidLengthPasswordException($value);
+        }
+    }
+
+    /**
+     * @throws InvalidPasswordFormatException
+     */
+    private function assertPasswordFormatIsValid(string $value): void
+    {
+        if (!preg_match('/^[a-zA-Z0-9]+$/', $value)) {
+            throw new InvalidPasswordFormatException($value);
+        }
     }
 
     public function equals(self $other): bool

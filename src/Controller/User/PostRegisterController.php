@@ -11,6 +11,7 @@ use App\WineTasting\Shared\Domain\ValueObjects\EmailValueObject;
 use App\WineTasting\Shared\Domain\ValueObjects\PasswordValueObject;
 use App\WineTasting\User\Application\RegisterUserCommand;
 use App\WineTasting\User\Application\RegisterUserCommandHandler;
+use App\WineTasting\User\Domain\Exceptions\EmailExistsException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -49,7 +50,8 @@ final class PostRegisterController extends AbstractController
             $this->userAuthenticator->authenticateUser($userDoctrine, $this->formLoginAuthenticator, $request);
 
             return $this->redirectToRoute('app_list_measurements');
-        } catch (InvalidSignInEmailException|InvalidPasswordException $exception) {
+        } catch (InvalidSignInEmailException|InvalidPasswordException|EmailExistsException $exception) {
+            return $this->renderForm('user/register.html.twig', ['error' => $exception->getMessage()]);
         }
     }
 }

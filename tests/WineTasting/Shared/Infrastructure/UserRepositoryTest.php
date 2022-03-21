@@ -6,7 +6,7 @@ use App\Entity\UserDoctrine;
 use App\Repository\DoctrineUserRepository;
 use App\WineTasting\User\Domain\Dto\UserDto;
 use App\WineTasting\Shared\Domain\ValueObjects\EmailValueObject;
-use App\WineTasting\Shared\Infrastructure\UserRepository;
+use App\WineTasting\User\Infrastructure\UserRepository;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
