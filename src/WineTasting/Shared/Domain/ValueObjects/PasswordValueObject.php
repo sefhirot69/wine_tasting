@@ -4,12 +4,8 @@ declare(strict_types=1);
 
 namespace App\WineTasting\Shared\Domain\ValueObjects;
 
-use App\WineTasting\Shared\Domain\Exceptions\InvalidPasswordException;
-
 class PasswordValueObject
 {
-    /**
-     */
     public function __construct(protected string $password)
     {
     }

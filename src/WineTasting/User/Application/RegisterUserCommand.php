@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\WineTasting\User\Application;
 
 use App\WineTasting\Shared\Domain\ValueObjects\EmailValueObject;
-use App\WineTasting\Shared\Domain\ValueObjects\PasswordValueObject;
 use App\WineTasting\User\Domain\Dto\UserRegisterDto;
 use App\WineTasting\User\Domain\ValueObject\PlainPasswordValueObject;
 
