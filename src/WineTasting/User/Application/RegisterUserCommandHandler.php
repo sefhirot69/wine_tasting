@@ -18,6 +18,9 @@ final class RegisterUserCommandHandler
     ) {
     }
 
+    /**
+     * @throws EmailExistsException
+     */
     public function __invoke(RegisterUserCommand $command): UserDto
     {
         $userRegisterDto = $command->mapToDto();

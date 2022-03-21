@@ -15,8 +15,8 @@ final class PasswordValueObject
      */
     public function __construct(private string $password)
     {
-        $this->assertPasswordIsLengthValid($this->password);
-        $this->assertPasswordFormatIsValid($this->password);
+//        $this->assertPasswordIsLengthValid($this->password);
+//        $this->assertPasswordFormatIsValid($this->password);
     }
 
     public function getPassword(): string

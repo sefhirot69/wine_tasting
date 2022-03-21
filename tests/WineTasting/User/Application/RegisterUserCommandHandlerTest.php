@@ -8,6 +8,7 @@ use App\WineTasting\User\Application\RegisterUserCommand;
 use App\WineTasting\User\Application\RegisterUserCommandHandler;
 use App\WineTasting\User\Domain\Dto\UserDto;
 use App\WineTasting\User\Domain\Dto\UserRegisterDto;
+use App\WineTasting\User\Domain\Exceptions\EmailExistsException;
 use App\WineTasting\User\Domain\UserDataSource;
 use App\WineTasting\User\Domain\UserHashPasswordDataSource;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -33,7 +34,7 @@ class RegisterUserCommandHandlerTest extends TestCase
         // GIVEN
         $email = new EmailValueObject('test@test.es');
         $plainPassword = new PasswordValueObject('passFake');
-        $hashedPassword = new PasswordValueObject('*****');
+        $hashedPassword = new PasswordValueObject('56789');
         $command = RegisterUserCommand::create($email, $plainPassword);
 
         $this->userHashPasswordDataSource
@@ -55,5 +56,38 @@ class RegisterUserCommandHandlerTest extends TestCase
         // THEN
         self::assertInstanceOf(UserDto::class, $result);
         self::assertNotSame($result->getPassword(), $plainPassword);
+    }
+
+    /**
+     * @test
+     */
+    public function shouldReturnAnExceptionEmailExist(): void
+    {
+        // THEN
+        $this->expectException(EmailExistsException::class);
+
+        $email = new EmailValueObject('test@test.es');
+        $plainPassword = new PasswordValueObject('passFake');
+        $hashedPassword = new PasswordValueObject('127381293');
+        $command = RegisterUserCommand::create($email, $plainPassword);
+
+        $this->userHashPasswordDataSource
+            ->expects(self::never())
+            ->method('userWithHashPassword')
+            ->willReturn(UserRegisterDto::create($email, $hashedPassword));
+        $this->userDataSourceMock
+            ->expects(self::never())
+            ->method('persist')
+            ->willReturn(UserDto::create(1, $email, [], $hashedPassword));
+        $this->userDataSourceMock
+            ->method('findUserByEmail')
+            ->willReturn(UserDto::create(2, $email, [], '******'));
+
+        // WHEN
+        $commandHandler = new RegisterUserCommandHandler(
+            $this->userHashPasswordDataSource,
+            $this->userDataSourceMock
+        );
+        ($commandHandler)($command);
     }
 }
