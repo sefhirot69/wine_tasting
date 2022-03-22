@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ListMeasurementsController!{% endblock %}
+
+{% block viewData %}
+    <form>
+        <div class="mb-3">
+            <label class="form-check-label" for="exampleCheck1">Tipo de medición</label>
+            <select class="form-control" name="measurement-type">
+                <option>Seleccione una opción</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-check-label" for="exampleCheck1">Tipo de variedad</label>
+            <select class="form-control" name="variety-type">
+                <option>Seleccione una opción</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-check-label" for="exampleCheck1">Año</label>
+            <input type="number" name="year" class="form-control" value=""/>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-check-label" for="exampleCheck1">Color</label>
+            <input type="text" name="colour" class="form-control" value=""/>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-check-label" for="exampleCheck1">Temperatura</label>
+            <input type="number" name="temperature" class="form-control" value=""/>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-check-label" for="exampleCheck1">Graduación</label>
+            <input type="number" name="graduation" class="form-control" value=""/>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-check-label" for="exampleCheck1">Ph</label>
+            <input type="number" name="ph" class="form-control" value=""/>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-check-label" for="exampleCheck1">Observaciones</label>
+            <textarea name="observations" class="form-control">
+            </textarea>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-check-label" for="exampleCheck1">Vino</label>
+            <input type="text" name="vine" class="form-control" value=""/>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+{% endblock viewData %}
