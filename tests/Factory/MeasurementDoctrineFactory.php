@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Factory;
+namespace App\Tests\Factory;
 
 use App\Entity\MeasurementDoctrine;
 use App\Repository\DoctrineMeasurementRepository;
@@ -28,7 +28,7 @@ use Zenstruck\Foundry\RepositoryProxy;
  */
 final class MeasurementDoctrineFactory extends ModelFactory
 {
-
+    
     protected function getDefaults(): array
     {
         return [
