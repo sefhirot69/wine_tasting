@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\WineTasting\Shared\Infrastructure;
+namespace App\WineTasting\User\Infrastructure;
 
 use App\Entity\UserDoctrine;
 use App\Repository\DoctrineUserRepository;

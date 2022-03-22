@@ -4,31 +4,15 @@ declare(strict_types=1);
 
 namespace App\WineTasting\Shared\Domain\ValueObjects;
 
-use App\WineTasting\Shared\Domain\Exceptions\InvalidPasswordException;
-
-final class PasswordValueObject
+class PasswordValueObject
 {
-    /**
-     * @throws InvalidPasswordException
-     */
-    public function __construct(private string $password)
+    public function __construct(protected string $password)
     {
-        $this->assertPasswordIsFormatValid($this->password);
     }
 
     public function getPassword(): string
     {
         return $this->password;
-    }
-
-    /**
-     * @throws InvalidPasswordException
-     */
-    private function assertPasswordIsFormatValid(string $value): void
-    {
-//        if (!filter_var($value, FILTER_VALIDATE_EMAIL)) {
-//            throw new InvalidPasswordException($value);
-//        }
     }
 
     public function equals(self $other): bool

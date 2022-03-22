@@ -2,16 +2,18 @@
 
 namespace App\Tests\WineTasting\Shared\Infrastructure;
 
-use App\Entity\UserDoctrine;
 use App\Repository\DoctrineUserRepository;
+use App\Tests\Factory\UserDoctrineFactory;
 use App\WineTasting\User\Domain\Dto\UserDto;
 use App\WineTasting\Shared\Domain\ValueObjects\EmailValueObject;
-use App\WineTasting\Shared\Infrastructure\UserRepository;
+use App\WineTasting\User\Infrastructure\UserRepository;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Zenstruck\Foundry\Test\Factories;
 
 final class UserRepositoryTest extends TestCase
 {
+    use Factories;
     private DoctrineUserRepository|MockObject $doctrineRepositoryMock;
 
     protected function setUp(): void
@@ -25,11 +27,12 @@ final class UserRepositoryTest extends TestCase
     public function shouldFindUserByEmail(): void
     {
         // GIVEN
+        $user = UserDoctrineFactory::createOne()->object();
         $email = new EmailValueObject('test@test.es');
         $this->doctrineRepositoryMock
             ->expects(self::once())
             ->method('findOneBy')
-            ->willReturn(UserDoctrine::create('test@test.es', [], 'passFake', 1));
+            ->willReturn($user);
 
         // WHEN
         $userRepository = new UserRepository($this->doctrineRepositoryMock);
@@ -37,10 +40,10 @@ final class UserRepositoryTest extends TestCase
 
         // THEN
         self::assertInstanceOf(UserDto::class, $userDto);
-        self::assertContains('ROLE_USER', $userDto->getRoles());
-        self::assertObjectHasAttribute('password', $userDto);
-        self::assertObjectHasAttribute('id', $userDto);
-        self::assertObjectHasAttribute('email', $userDto);
+        self::assertSame($userDto->getId(), $user->getId());
+        self::assertSame($userDto->getRoles(), $user->getRoles());
+        self::assertSame($userDto->getPassword(), $user->getPassword());
+        self::assertSame($userDto->getEmail(), $user->getEmail());
     }
 
     /**

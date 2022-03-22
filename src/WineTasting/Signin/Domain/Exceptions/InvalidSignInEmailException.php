@@ -1,8 +1,10 @@
 <?php
 
-namespace App\WineTasting\Shared\Domain\Exceptions;
+namespace App\WineTasting\Signin\Domain\Exceptions;
 
-final class InvalidSignInEmailException extends \Exception
+use PharIo\Manifest\InvalidEmailException;
+
+final class InvalidSignInEmailException extends InvalidEmailException
 {
     protected $code = 400;
     protected $message = 'Sign In Email not valid `%s`';
