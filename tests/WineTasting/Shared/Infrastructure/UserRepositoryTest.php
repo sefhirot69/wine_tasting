@@ -2,7 +2,6 @@
 
 namespace App\Tests\WineTasting\Shared\Infrastructure;
 
-use App\Entity\UserDoctrine;
 use App\Repository\DoctrineUserRepository;
 use App\Tests\Factory\UserDoctrineFactory;
 use App\WineTasting\User\Domain\Dto\UserDto;

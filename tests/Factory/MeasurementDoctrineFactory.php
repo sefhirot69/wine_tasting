@@ -28,7 +28,6 @@ use Zenstruck\Foundry\RepositoryProxy;
  */
 final class MeasurementDoctrineFactory extends ModelFactory
 {
-    
     protected function getDefaults(): array
     {
         return [

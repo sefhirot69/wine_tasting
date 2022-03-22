@@ -28,7 +28,6 @@ use Zenstruck\Foundry\Proxy;
  */
 final class UserDoctrineFactory extends ModelFactory
 {
-
     protected function getDefaults(): array
     {
         return [
