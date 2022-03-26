@@ -250,14 +250,8 @@ class MeasurementDoctrine
                 $this->getGraduation(),
                 $this->getPh(),
             ),
-            MeasurementType::create(
-                $this->getMeasurementType()->getId(),
-                $this->getMeasurementType()->getName(),
-            ),
-            VarietyType::create(
-                $this->getVarietyType()->getId(),
-                $this->getVarietyType()->getName(),
-            ),
+            $this->getMeasurementType()->mapToDomain(),
+            $this->getVarietyType()->mapToDomain(),
             $this->getObservations(),
             $this->getVine()
         );

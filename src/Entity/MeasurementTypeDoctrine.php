@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\WineTasting\Measurements\Domain\MeasurementType;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -51,5 +52,10 @@ class MeasurementTypeDoctrine
         $this->name = $name;
 
         return $this;
+    }
+
+    public function mapToDomain(): MeasurementType
+    {
+        return MeasurementType::create($this->getId(), $this->getName());
     }
 }

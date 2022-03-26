@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\WineTasting\Measurements\Domain\VarietyType;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -51,5 +52,10 @@ class VarietyTypeDoctrine
         $this->name = $name;
 
         return $this;
+    }
+
+    public function mapToDomain(): VarietyType
+    {
+        return VarietyType::create($this->getId(), $this->getName());
     }
 }

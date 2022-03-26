@@ -30,15 +30,15 @@ final class GetParametricMeasurementsQueryHandlerTest extends TestCase
     {
         // GIVEN
         $measurementsType = [
-            MeasurementTypeDoctrineFactory::new()->create()->object(),
-            MeasurementTypeDoctrineFactory::new()->create()->object(),
-            MeasurementTypeDoctrineFactory::new()->create()->object(),
+            MeasurementTypeDoctrineFactory::new()->create()->object()->mapToDomain()->mapToDto(),
+            MeasurementTypeDoctrineFactory::new()->create()->object()->mapToDomain()->mapToDto(),
+            MeasurementTypeDoctrineFactory::new()->create()->object()->mapToDomain()->mapToDto(),
         ];
 
         $varietiesType = [
-            VarietyTypeDoctrineFactory::new()->create()->object(),
-            VarietyTypeDoctrineFactory::new()->create()->object(),
-            VarietyTypeDoctrineFactory::new()->create()->object(),
+            VarietyTypeDoctrineFactory::new()->create()->object()->mapToDomain()->mapToDto(),
+            VarietyTypeDoctrineFactory::new()->create()->object()->mapToDomain()->mapToDto(),
+            VarietyTypeDoctrineFactory::new()->create()->object()->mapToDomain()->mapToDto(),
         ];
 
         $this->dataSourceMock
