@@ -54,6 +54,18 @@ class VarietyTypeDoctrine
         return $this;
     }
 
+    /**
+     * @param VarietyTypeDoctrine[] $varietiesType
+     *
+     * @return VarietyType[]
+     */
+    public static function mapToArrayDomain(array $varietiesType): array
+    {
+        return array_map(static function (VarietyTypeDoctrine $variety) {
+            return $variety->mapToDomain();
+        }, $varietiesType);
+    }
+
     public function mapToDomain(): VarietyType
     {
         return VarietyType::create($this->getId(), $this->getName());
