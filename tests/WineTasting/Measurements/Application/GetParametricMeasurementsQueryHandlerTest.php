@@ -8,7 +8,9 @@ use App\Tests\Factory\MeasurementTypeDoctrineFactory;
 use App\Tests\Factory\VarietyTypeDoctrineFactory;
 use App\WineTasting\Measurements\Application\GetParametricMeasurementsQueryHandler;
 use App\WineTasting\Measurements\Application\ParametricMeasurementsDataSource;
+use App\WineTasting\Measurements\Domain\Dto\MeasurementTypeDto;
 use App\WineTasting\Measurements\Domain\Dto\ParametricMeasurementsDto;
+use App\WineTasting\Measurements\Domain\Dto\VarietyTypeDto;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Zenstruck\Foundry\Test\Factories;
@@ -54,6 +56,14 @@ final class GetParametricMeasurementsQueryHandlerTest extends TestCase
         $result = ($queryHandler)();
 
         // THEN
-        self::assertInstanceOf(ParametricMeasurementsDto::class, $result);
+        self::assertIsArray($result->getVarietiesType());
+        self::assertIsArray($result->getMeasurementsType());
+        foreach ($result->getVarietiesType() as $varietyTypeDto) {
+            self::assertInstanceOf(VarietyTypeDto::class, $varietyTypeDto);
+        }
+
+        foreach ($result->getMeasurementsType() as $measurementTypeDto) {
+            self::assertInstanceOf(MeasurementTypeDto::class, $measurementTypeDto);
+        }
     }
 }

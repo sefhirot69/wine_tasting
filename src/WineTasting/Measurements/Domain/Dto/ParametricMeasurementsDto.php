@@ -22,7 +22,7 @@ final class ParametricMeasurementsDto
     /**
      * @return MeasurementTypeDto[]
      */
-    public function getMeasurementType(): array
+    public function getMeasurementsType(): array
     {
         return $this->measurementType;
     }
@@ -30,7 +30,7 @@ final class ParametricMeasurementsDto
     /**
      * @return VarietyTypeDto[]
      */
-    public function getVarietyType(): array
+    public function getVarietiesType(): array
     {
         return $this->varietyType;
     }
