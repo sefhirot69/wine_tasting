@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\WineTasting\Shared\Infrastructure;
+namespace App\Tests\WineTasting\User\Infrastructure;
 
 use App\Repository\DoctrineUserRepository;
 use App\Tests\Factory\UserDoctrineFactory;
