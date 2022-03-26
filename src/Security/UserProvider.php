@@ -3,8 +3,9 @@
 namespace App\Security;
 
 use App\Entity\UserDoctrine;
+use App\WineTasting\Shared\Domain\Exceptions\InvalidEmailFormatException;
+use App\WineTasting\Signin\Domain\Exceptions\InvalidSignInEmailException;
 use App\WineTasting\User\Domain\Exceptions\EmailNotFoundException;
-use App\WineTasting\Shared\Domain\Exceptions\InvalidSignInEmailException;
 use App\WineTasting\Signin\Application\SignInCommand;
 use App\WineTasting\Signin\Application\SignInCommandHandler;
 use App\WineTasting\Signin\Domain\SignInEmailValueObject;
@@ -30,6 +31,7 @@ class UserProvider implements UserProviderInterface, PasswordUpgraderInterface
      * this method.
      *
      * @return UserDoctrine
+     * @throws InvalidEmailFormatException
      */
     public function loadUserByIdentifier(string $identifier): UserInterface
     {
